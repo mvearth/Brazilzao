@@ -16,10 +16,10 @@ namespace Brazilzao.Models
         {
             foreach(var match in this.Matches){
                 var home = Classifications.FirstOrDefault(c => c.Team.Equals(match.Home));
+                home.UpdateWithResult(match.HomeGoals, match.VisitorGoals);
 
-                home.Points += match.GetHomePoints();
-                home.GoalsFor += match.HomeGoals;
-                home.GoalsAgainst += match.VisitorGoals;
+                var visitor = Classifications.FirstOrDefault(c => c.Team.Equals(match.Visitor));
+                visitor.UpdateWithResult(match.VisitorGoals, match.HomeGoals);
             }
         }
     }
