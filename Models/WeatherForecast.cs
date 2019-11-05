@@ -1,6 +1,6 @@
 using System;
 
-namespace Brazilzao
+namespace Brazilzao.Models
 {
     public class WeatherForecast
     {
