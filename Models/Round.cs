@@ -1,20 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Brazilzao.Models
 {
-    public class Round : IRound
+    public class Round : IEntity
     {
+        public int Id { get; set; }
         public DateTime DateTime { get; set; }
-
-        public IList<ITeamClassification> Classifications { get; set; }
-
-        public IList<IMatch> Matches { get; set; }
-
-        public void DistributePoints() 
+        public IList<TeamClassification> Classifications { get; set; }
+        public IList<Match> Matches { get; set; }
+        
+        public void DistributePoints()
         {
-            foreach(var match in this.Matches){
+            foreach (var match in this.Matches)
+            {
                 var home = Classifications.FirstOrDefault(c => c.Team.Equals(match.Home));
                 home.UpdateWithResult(match.HomeGoals, match.VisitorGoals);
 
