@@ -1,20 +1,18 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Brazilzao.Models
 {
-    public class TeamClassification : ITeamClassification
+    public class TeamClassification : IEntity
     {
+        public int Id { get; set; }
         public int Points { get; set; }
-
         public int GoalsFor { get; set; }
-
         public int GoalsAgainst { get; set; }
-
         public int Draws { get; set; }
-
         public int Wins { get; set; }
-
         public int Loses { get; set; }
-
-        public ITeam Team { get; set; }
+        public Team Team { get; set; }
+        
         public void UpdateWithResult(int goalsFor, int goalsAgainst)
         {
             this.GoalsFor += goalsAgainst;
@@ -27,9 +25,10 @@ namespace Brazilzao.Models
             this.Points += matchPoints;
         }
 
-        public int CalculatePoints(int goalsFor, int goalsAgainst) => goalsFor > goalsAgainst ? 3
-            : goalsFor == goalsAgainst ? 1
-            : 0;
+        public int CalculatePoints(int goalsFor, int goalsAgainst) => 
+            goalsFor > goalsAgainst ? 3
+                : goalsFor == goalsAgainst ? 1
+                : 0;
 
         private void UpdateMatchResult(int points)
         {

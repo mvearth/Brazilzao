@@ -1,13 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Brazilzao.Models
 {
-    public class Match : IMatch
+    public class Match : IEntity
     {
-        public ITeam Visitor { get; set; }
-
-        public ITeam Home { get; set; }
-
+        public int Id { get; set; }
+        public Team Visitor { get; set; }
+        public Team Home { get; set; }
         public int VisitorGoals { get; set; }
-
         public int HomeGoals { get; set; }
         
         public void SetResult(int homeGoals, int visitorGoals)
