@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Brazilzao.Models.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Brazilzao.Models.Repository
 {
     public class EntityRepository : IRepository
     {
-        private DbContext context;
+        private BrazilzaoContext context;
 
-        public EntityRepository(DbContext context) => this.context = context;
+        public EntityRepository(BrazilzaoContext context) => this.context = context;
 
         public void Save() =>
             this.context.SaveChanges();

@@ -30,5 +30,13 @@ namespace Brazilzao.Controllers
 
             return Championship;
         }
+
+        // POST: api/Championships
+        [HttpPost]
+        public async Task GetChampionship([FromBody]Championship championship)
+        {
+            await this.repository.AddAsync(championship);
+            await this.repository.SaveAsync();
+        }
     }
 }
