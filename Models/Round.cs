@@ -9,8 +9,8 @@ namespace Brazilzao.Models
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; }
-        public IList<TeamClassification> Classifications { get; set; }
-        public IList<Match> Matches { get; set; }
+        public IList<TeamClassification> Classifications { get; set; } = new List<TeamClassification>();
+        public IList<Match> Matches { get; set; } = new List<Match>();
         
         public void DistributePoints()
         {
