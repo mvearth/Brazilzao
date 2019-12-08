@@ -1,8 +1,8 @@
+using Brazilzao.SDK.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
-namespace Brazilzao.Models.Repository
+namespace Brazilzao.API.Repository
 {
     public interface IRepository
     {

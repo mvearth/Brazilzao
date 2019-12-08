@@ -1,6 +1,7 @@
+using Brazilzao.SDK.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Brazilzao.Models.Contexts
+namespace Brazilzao.API.Contexts
 {
     public class BrazilzaoContext : DbContext
     {

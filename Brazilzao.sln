@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brazilzao.Models", "src\Brazilzao.Models\Brazilzao.Models.csproj", "{D1449FBA-C563-432F-9D09-A41F1DB71514}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brazilzao.SDK", "src\Brazilzao.SDK\Brazilzao.SDK.csproj", "{D1449FBA-C563-432F-9D09-A41F1DB71514}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrazilzaoAPI", "src\BrazilzaoAPI\BrazilzaoAPI.csproj", "{80C0EA81-8968-46F0-9E4A-68D1B73C6541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brazilzao.API", "src\Brazilzao.API\Brazilzao.API.csproj", "{80C0EA81-8968-46F0-9E4A-68D1B73C6541}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

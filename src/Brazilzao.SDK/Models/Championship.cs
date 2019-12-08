@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Brazilzao.Models
+namespace Brazilzao.SDK.Models
 {
     public class Championship : IEntity
     {

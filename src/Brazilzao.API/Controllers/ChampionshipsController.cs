@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
-using Brazilzao.Models;
-using Brazilzao.Models.Repository;
+using Brazilzao.API.Repository;
+using Brazilzao.SDK.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace Brazilzao.Controllers
+namespace Brazilzao.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

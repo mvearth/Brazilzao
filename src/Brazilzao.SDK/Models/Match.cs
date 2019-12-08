@@ -1,6 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace Brazilzao.Models
+namespace Brazilzao.SDK.Models
 {
     public class Match : IEntity
     {
