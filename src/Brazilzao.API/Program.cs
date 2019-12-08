@@ -1,11 +1,11 @@
 using System;
-using Brazilzao.Models.Contexts;
+using Brazilzao.API.Contexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Brazilzao
+namespace Brazilzao.API
 {
     public class Program
     {

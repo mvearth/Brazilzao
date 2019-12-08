@@ -1,5 +1,5 @@
-using Brazilzao.Models.Contexts;
-using Brazilzao.Models.Repository;
+using Brazilzao.API.Contexts;
+using Brazilzao.API.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Brazilzao
+namespace Brazilzao.API
 {
     public class Startup
     {

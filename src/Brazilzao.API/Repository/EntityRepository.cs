@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Brazilzao.Models.Contexts;
+using Brazilzao.API.Contexts;
+using Brazilzao.SDK.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Brazilzao.Models.Repository
+namespace Brazilzao.API.Repository
 {
     public class EntityRepository : IRepository
     {

@@ -1,4 +1,4 @@
-namespace Brazilzao.Models
+namespace Brazilzao.SDK.Models
 {
     public interface IEntity
     {
