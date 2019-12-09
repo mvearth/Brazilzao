@@ -12,8 +12,6 @@ namespace Brazilzao.API.Repository
 
         void Update<T>(T entity) where T : class, IEntity;
 
-        void Remove<T>(int id) where T : class, IEntity;
-
         Task SaveAsync();
     }
 }
