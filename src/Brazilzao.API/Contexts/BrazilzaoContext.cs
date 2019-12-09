@@ -1,5 +1,7 @@
 using Brazilzao.SDK.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 
 namespace Brazilzao.API.Contexts
 {
@@ -32,6 +34,52 @@ namespace Brazilzao.API.Contexts
             modelBuilder.Entity<Team>().ToTable("Team");
             modelBuilder.Entity<Match>().ToTable("Match");
             modelBuilder.Entity<Round>().ToTable("Round");
+        }
+
+        public void Populate()
+        {
+            var teams = this.CreateTeams();
+
+            var championship = new Championship()
+            {
+                Edition = "First",
+                InitialDate = DateTime.Now,
+                Name = "Brasileirão",
+                TeamVacancies = 20,
+            };
+
+            championship.Rounds = championship.GetRounds(teams);
+
+            this.Add(championship);
+
+            this.SaveChanges();
+        }
+
+        private IList<Team> CreateTeams()
+        {
+            return new List<Team>()
+            {
+                new Team() { Name = "Flamengo"},
+                new Team() { Name = "Santos"},
+                new Team() { Name = "Palmeiras"},
+                new Team() { Name = "Grêmio"},
+                new Team() { Name = "Athletico-PR"},
+                new Team() { Name = "São Paulo"},
+                new Team() { Name = "Corinthians"},
+                new Team() { Name = "Internacional"},
+                new Team() { Name = "Fortaleza"},
+                new Team() { Name = "Goiás"},
+                new Team() { Name = "Atlético-MG"},
+                new Team() { Name = "Bahia"},
+                new Team() { Name = "Vasco"},
+                new Team() { Name = "Fluminense"},
+                new Team() { Name = "Botafogo"},
+                new Team() { Name = "Ceará"},
+                new Team() { Name = "Cruzeiro"},
+                new Team() { Name = "CSA"},
+                new Team() { Name = "Chapecoense"},
+                new Team() { Name = "Ava"}
+            };
         }
     }
 }

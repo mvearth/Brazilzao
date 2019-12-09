@@ -73,11 +73,7 @@ namespace Brazilzao.SDK.Client
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var outputContent = await response.Content.ReadAsStringAsync();
-
-                    var output = JsonConvert.DeserializeObject<IRoundOutputModel>(outputContent);
-
-                    return output;
+                    return new RoundOutputModel() { ChampionshipID = inputModel.ChampionshipID, Round = inputModel.Round };
                 }
                 else
                     return new RoundOutputModel() { ChampionshipID = inputModel.ChampionshipID, Round = null };
