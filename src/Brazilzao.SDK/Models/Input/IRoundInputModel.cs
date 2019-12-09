@@ -1,6 +1,10 @@
-﻿namespace Brazilzao.SDK.Models.Input
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Brazilzao.SDK.Models.Input
 {
-    interface IRoundInputModel
+    public interface IRoundInputModel
     {
         Round Round { get; set; }
 

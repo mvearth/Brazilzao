@@ -1,6 +1,6 @@
 ﻿namespace Brazilzao.SDK.Models.Output
 {
-    interface IRoundOutputModel
+    public interface IRoundOutputModel
     {
         Round Round { get; set; }
 

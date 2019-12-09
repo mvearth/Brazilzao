@@ -121,5 +121,15 @@ namespace Brazilzao.API.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Task<Championship> GetChampionshipAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Round> GetRoundAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

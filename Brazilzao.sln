@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brazilzao.SDK", "src\Brazilzao.SDK\Brazilzao.SDK.csproj", "{D1449FBA-C563-432F-9D09-A41F1DB71514}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brazilzao.SDK", "src\Brazilzao.SDK\Brazilzao.SDK.csproj", "{D1449FBA-C563-432F-9D09-A41F1DB71514}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brazilzao.API", "src\Brazilzao.API\Brazilzao.API.csproj", "{80C0EA81-8968-46F0-9E4A-68D1B73C6541}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AF1B7EB8-C36E-46C1-840A-95124FA47202}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{054ECB9D-F305-497B-BF56-21DB34962309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brazilzao.SDK.Tests", "tests\Brazilzao.SDK.Tests\Brazilzao.SDK.Tests.csproj", "{0CDD9164-56AA-4A0F-94D3-F1D225108B72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +27,18 @@ Global
 		{80C0EA81-8968-46F0-9E4A-68D1B73C6541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80C0EA81-8968-46F0-9E4A-68D1B73C6541}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80C0EA81-8968-46F0-9E4A-68D1B73C6541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CDD9164-56AA-4A0F-94D3-F1D225108B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CDD9164-56AA-4A0F-94D3-F1D225108B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CDD9164-56AA-4A0F-94D3-F1D225108B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CDD9164-56AA-4A0F-94D3-F1D225108B72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1449FBA-C563-432F-9D09-A41F1DB71514} = {AF1B7EB8-C36E-46C1-840A-95124FA47202}
+		{80C0EA81-8968-46F0-9E4A-68D1B73C6541} = {AF1B7EB8-C36E-46C1-840A-95124FA47202}
+		{0CDD9164-56AA-4A0F-94D3-F1D225108B72} = {054ECB9D-F305-497B-BF56-21DB34962309}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4C3B534-52A3-42FD-ACBF-0C491B64FB65}
