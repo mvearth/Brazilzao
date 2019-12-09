@@ -13,5 +13,10 @@ namespace Brazilzao.SDK.Models
             this.HomeGoals = homeGoals;
             this.VisitorGoals = visitorGoals;
         }
+
+        public override string ToString()
+        {
+            return $"{this.Home.Name} X {this.Visitor.Name}";
+        }
     }
 }

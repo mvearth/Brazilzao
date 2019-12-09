@@ -1,5 +1,7 @@
 using Brazilzao.API.Repository;
 using Brazilzao.SDK.Models;
+using Brazilzao.SDK.Models.Input;
+using Brazilzao.SDK.Models.Output;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -22,7 +24,7 @@ namespace Brazilzao.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Round>> GetRound(int id)
         {
-            var Round = await repository.GetAsync<Round>(id);
+            var Round = await repository.GetRoundAsync(id);
 
             if (Round == null)
             {
@@ -30,29 +32,60 @@ namespace Brazilzao.API.Controllers
             }
 
             return Round;
+        }
+
+        [HttpGet("byChampionship/{id}")]
+        public async Task<ActionResult<IRoundsOutputModel>> GetRoundsByChampionship(int id)
+        {
+            var championship = await repository.GetChampionshipAsync(id);
+
+            if (championship?.Rounds is null)
+            {
+                return NotFound();
+            }
+
+            return new RoundsOutputModel() { Rounds = championship.Rounds, ChampionshipID = id };
         }
 
         [HttpGet("byDate")]
-        public async Task<ActionResult<Round>> GetRoundByDate(string day, string month, string year)
+        public async Task<ActionResult<IRoundOutputModel>> GetRoundByDate(string championshipID, string day, string month, string year)
         {
             var date = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
 
-            var Round = (await this.repository.GetAllAsync<Round>()).FirstOrDefault(r => r.DateTime.Equals(date));
-
-            if (Round == null)
+            if (int.TryParse(championshipID, out int championshipIntID))
             {
-                return NotFound();
-            }
+                var championship = await this.repository.GetChampionshipAsync(championshipIntID);
 
-            return Round;
+                var Round = championship.Rounds.OrderBy(r => r.DateTime.Subtract(date)).FirstOrDefault();
+
+                if (Round == null)
+                    return NotFound();
+
+                return new RoundOutputModel() { ChampionshipID = championshipIntID, Round = Round };
+            }
+            else
+                return NotFound();
         }
 
-        // POST: api/Rounds
-        [HttpPost]
-        public async Task AddRound(Round Round)
+        [HttpPut]
+        public async Task UpdateRound(IRoundInputModel inputModel)
         {
-            await this.repository.AddAsync(Round);
-            await this.repository.SaveAsync();
+            if(inputModel?.Round != null)
+            {
+                var championship = await this.repository.GetChampionshipAsync(inputModel.ChampionshipID);
+
+                var round = championship.Rounds.FirstOrDefault(r => r.Id.Equals(inputModel.Round.Id));
+
+                var roundIndex = championship.Rounds.IndexOf(round);
+
+                championship.Rounds[roundIndex] = inputModel.Round;
+
+                this.repository.Update(championship);
+
+                this.repository.Update(round);
+
+                await this.repository.SaveAsync();
+            }
         }
     }
 }
