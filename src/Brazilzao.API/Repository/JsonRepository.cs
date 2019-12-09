@@ -1,6 +1,5 @@
 ﻿using Brazilzao.SDK.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -70,7 +69,18 @@ namespace Brazilzao.API.Repository
 
         public Task<Round> GetRoundAsync(int id)
         {
-            throw new NotImplementedException();
+            return new Task<Round>(() =>
+            {
+                foreach (var championship in this.championships)
+                {
+                    var round = championship.Rounds.FirstOrDefault(r => r.Id.Equals(id));
+
+                    if (round != null)
+                        return round;
+                }
+
+                return null;
+            });
         }
     }
 }
