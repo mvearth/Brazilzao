@@ -49,10 +49,16 @@ namespace Brazilzao.SDK.Models
 
             for (int i = 0; i < teams.Count; i++)
             {
+                var teamClassifications = new List<TeamClassification>();
+
+                foreach (var team in teams)
+                    teamClassifications.Add(new TeamClassification() { Team = team });
+
                 firstTurn.Add(new Round()
                 {
                     DateTime = lastRound,
-                    Matches = new List<Match>(20)
+                    Matches = new List<Match>(20),
+                    Classifications = teamClassifications
                 });
 
                 nextWednesday = ((int)DayOfWeek.Wednesday - (int)lastRound.DayOfWeek + 7) % 7;
@@ -64,6 +70,11 @@ namespace Brazilzao.SDK.Models
 
             for (int i = 0; i < teams.Count; i++)
             {
+                var teamClassifications = new List<TeamClassification>();
+
+                foreach (var team in teams)
+                    teamClassifications.Add(new TeamClassification() { Team = team });
+
                 secondTurn.Add(new Round()
                 {
                     DateTime = lastRound,
@@ -135,10 +146,16 @@ namespace Brazilzao.SDK.Models
 
             for (int i = 0; i < teams.Count; i++)
             {
+                var teamClassifications = new List<TeamClassification>();
+
+                foreach (var team in teams)
+                    teamClassifications.Add(new TeamClassification() { Team = team });
+
                 firstTurn.Add(new Round()
                 {
                     DateTime = lastRound,
-                    Matches = new List<Match>(20)
+                    Matches = new List<Match>(20),
+                    Classifications = teamClassifications
                 });
 
                 nextWednesday = ((int)DayOfWeek.Wednesday - (int)lastRound.DayOfWeek + 7) % 7;
@@ -150,10 +167,16 @@ namespace Brazilzao.SDK.Models
 
             for (int i = 0; i < teams.Count; i++)
             {
+                var teamClassifications = new List<TeamClassification>();
+
+                foreach (var team in teams)
+                    teamClassifications.Add(new TeamClassification() { Team = team });
+
                 secondTurn.Add(new Round()
                 {
                     DateTime = lastRound,
-                    Matches = new List<Match>(20)
+                    Matches = new List<Match>(20),
+                    Classifications = teamClassifications
                 });
 
                 nextWednesday = ((int)DayOfWeek.Wednesday - (int)lastRound.DayOfWeek + 7) % 7;

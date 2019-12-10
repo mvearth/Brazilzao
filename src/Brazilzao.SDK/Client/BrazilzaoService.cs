@@ -2,6 +2,7 @@
 using Brazilzao.SDK.Models.Output;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Brazilzao.SDK.Client
@@ -12,25 +13,25 @@ namespace Brazilzao.SDK.Client
 
         private readonly string host;
 
-        public BrazilzaoService(string host = @"http://localhost:50096")
+        public BrazilzaoService(string host = @"http://localhost:64343")
         {
             this.host = host;
         }
 
-        public async Task<IRoundOutputModel> GetRoundByDate(IDateInputModel inputModel)
+        public async Task<RoundOutputModel> GetRoundByDate(IDateInputModel inputModel)
         {
-            var response = await client.GetAsync(
+            var response = client.GetAsync(
                 $"{this.host}/api/Rounds/byDate" +
                     $"?championshipID={inputModel.ChampionshipID}" +
                     $"&day={inputModel.Day}" +
                     $"&month={inputModel.Month}" +
-                    $"&year={inputModel.Year}");
+                    $"&year={inputModel.Year}").GetAwaiter().GetResult();
 
             if (response.IsSuccessStatusCode)
             {
-                var outputContent = await response.Content.ReadAsStringAsync();
+                var outputContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                var output = JsonConvert.DeserializeObject<IRoundOutputModel>(outputContent);
+                var output = JsonConvert.DeserializeObject<RoundOutputModel>(outputContent);
 
                 return output;
             }
@@ -49,9 +50,9 @@ namespace Brazilzao.SDK.Client
 
             if (response.IsSuccessStatusCode)
             {
-                var reponseContent = await response.Content.ReadAsStringAsync();
+                var reponseContent = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                var roundOutput = JsonConvert.DeserializeObject<IRoundOutputModel>(reponseContent);
+                var roundOutput = JsonConvert.DeserializeObject<RoundOutputModel>(reponseContent);
 
                 return new ClassificationOutputModel()
                 {
@@ -64,9 +65,9 @@ namespace Brazilzao.SDK.Client
                 return new ClassificationOutputModel() { ChampionshipID = inputModel.ChampionshipID, Classifications = null };
         }
 
-        public async Task<IRoundOutputModel> UpdateRound(IRoundInputModel inputModel)
+        public async Task<RoundOutputModel> UpdateRound(IRoundInputModel inputModel)
         {
-            using (var content = new StringContent(JsonConvert.SerializeObject(inputModel)))
+            using (var content = new StringContent(JsonConvert.SerializeObject(inputModel), Encoding.UTF8, "application/json"))
             {
                 var response = await client.PutAsync(
                     $"{this.host}/api/Rounds", content);
@@ -80,16 +81,16 @@ namespace Brazilzao.SDK.Client
             }
         }
 
-        public async Task<IRoundsOutputModel> GetRoundsByChampionship(int championshipID)
+        public async Task<RoundsOutputModel> GetRoundsByChampionship(int championshipID)
         {
-            var response = await client.GetAsync(
-                $"{this.host}/api/Rounds/byChampionship/{championshipID}");
+            var response = client.GetAsync(
+                $"{this.host}/api/Rounds/byChampionship/{championshipID}").GetAwaiter().GetResult();
 
             if (response.IsSuccessStatusCode)
             {
                 var outputContent = await response.Content.ReadAsStringAsync();
 
-                var output = JsonConvert.DeserializeObject<IRoundsOutputModel>(outputContent);
+                var output = JsonConvert.DeserializeObject<RoundsOutputModel>(outputContent);
 
                 return output;
             }

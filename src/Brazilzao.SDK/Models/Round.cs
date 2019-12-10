@@ -13,7 +13,7 @@ namespace Brazilzao.SDK.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateTime { get; set; }
 
-        public IList<TeamClassification> Classifications { get; set; } = new List<TeamClassification>();
+        public IList<TeamClassification> Classifications { get; set; }
 
         public IList<Match> Matches { get; set; }
         
@@ -21,10 +21,10 @@ namespace Brazilzao.SDK.Models
         {
             foreach (var match in this.Matches)
             {
-                var home = Classifications.FirstOrDefault(c => c.Team.Equals(match.Home));
+                var home = Classifications.FirstOrDefault(c => c.Team.Id.Equals(match.Home.Id));
                 home.UpdateWithResult(match.HomeGoals, match.VisitorGoals);
 
-                var visitor = Classifications.FirstOrDefault(c => c.Team.Equals(match.Visitor));
+                var visitor = Classifications.FirstOrDefault(c => c.Team.Id.Equals(match.Visitor.Id));
                 visitor.UpdateWithResult(match.VisitorGoals, match.HomeGoals);
             }
         }

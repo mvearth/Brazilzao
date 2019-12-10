@@ -25,14 +25,17 @@ namespace Brazilzao.API.Repository
 
         public void Update<T>(T entity) where T : class, IEntity
         {
-            this.context.Set<T>().Attach(entity);
-            this.context.Entry(entity).State = EntityState.Modified;
+            this.context.Set<T>().Update(entity);
+
+            this.context.SaveChanges();
         }
 
         public Task<Championship> GetChampionshipAsync(int id)
         {
             return this.context.Championships
                 .Include("Rounds")
+                .Include("Rounds.Classifications")
+                .Include("Rounds.Classifications.Team")
                 .Include("Rounds.Matches")
                 .Include("Rounds.Matches.Home")
                 .Include("Rounds.Matches.Visitor")
@@ -42,6 +45,8 @@ namespace Brazilzao.API.Repository
         public Task<Round> GetRoundAsync(int id)
         {
             return this.context.Rounds
+                .Include("Classifications")
+                .Include("Classifications.Team")
                 .Include("Matches")
                 .Include("Matches.Home")
                 .Include("Matches.Visitor")

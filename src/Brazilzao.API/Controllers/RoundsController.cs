@@ -35,7 +35,7 @@ namespace Brazilzao.API.Controllers
         }
 
         [HttpGet("byChampionship/{id}")]
-        public async Task<ActionResult<IRoundsOutputModel>> GetRoundsByChampionship(int id)
+        public async Task<ActionResult<RoundsOutputModel>> GetRoundsByChampionship(int id)
         {
             var championship = await repository.GetChampionshipAsync(id);
 
@@ -48,7 +48,7 @@ namespace Brazilzao.API.Controllers
         }
 
         [HttpGet("byDate")]
-        public async Task<ActionResult<IRoundOutputModel>> GetRoundByDate(string championshipID, string day, string month, string year)
+        public async Task<ActionResult<RoundOutputModel>> GetRoundByDate(string championshipID, string day, string month, string year)
         {
             var date = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
 
@@ -68,9 +68,9 @@ namespace Brazilzao.API.Controllers
         }
 
         [HttpPut]
-        public async Task UpdateRound(IRoundInputModel inputModel)
+        public async Task UpdateRound(RoundInputModel inputModel)
         {
-            if(inputModel?.Round != null)
+            if (inputModel?.Round != null)
             {
                 var championship = await this.repository.GetChampionshipAsync(inputModel.ChampionshipID);
 
@@ -78,11 +78,33 @@ namespace Brazilzao.API.Controllers
 
                 var roundIndex = championship.Rounds.IndexOf(round);
 
+                var previousRound = championship.Rounds.FirstOrDefault(r => round.DateTime.Subtract(r.DateTime).Days < 5 && round.DateTime.Subtract(r.DateTime).Days > 0);
+
+                if (previousRound != null)
+                {
+                    foreach (var classification in previousRound.Classifications)
+                    {
+                        var currentClassification = inputModel.Round.Classifications.FirstOrDefault(c => c.Team.Id.Equals(classification.Team.Id));
+
+                        currentClassification.GoalsAgainst = classification.GoalsAgainst;
+                        currentClassification.GoalsFor = classification.GoalsFor;
+                        currentClassification.Loses = classification.Loses;
+                        currentClassification.Points = classification.Points;
+                        currentClassification.Wins = classification.Wins;
+                    }
+                    inputModel.Round.Classifications = previousRound.Classifications;
+                }
+
+                inputModel.Round.DistributePoints();
+
                 championship.Rounds[roundIndex] = inputModel.Round;
 
                 this.repository.Update(championship);
 
                 this.repository.Update(round);
+
+                foreach (var teamClassification in round.Classifications)
+                    this.repository.Update(teamClassification);
 
                 await this.repository.SaveAsync();
             }

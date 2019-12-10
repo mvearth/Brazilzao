@@ -9,7 +9,7 @@ namespace Brazilzao.API.Repository
 {
     public class JsonRepository : IRepository
     {
-        private readonly string championshipsPath = @"C:\Users\mathv\source\repos\Brazilzao\Championships";
+        private readonly string championshipsPath = @"C:\Users\fabio\Desktop\ACaraDoBrazilzaoObjects\Championship.json";
 
         private readonly List<Championship> championships;
 

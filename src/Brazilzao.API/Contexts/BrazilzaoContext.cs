@@ -28,6 +28,7 @@ namespace Brazilzao.API.Contexts
             modelBuilder.Entity<Match>().HasOne(tc => tc.Home);
             modelBuilder.Entity<Match>().HasOne(tc => tc.Visitor);
             modelBuilder.Entity<Round>().HasMany(r => r.Matches);
+            modelBuilder.Entity<Round>().HasMany(r => r.Classifications);
 
             modelBuilder.Entity<Championship>().ToTable("Championship");
             modelBuilder.Entity<TeamClassification>().ToTable("TeamClassification");
